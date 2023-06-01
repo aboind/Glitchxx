@@ -288,39 +288,19 @@ EOF
 }
 
 export_list() {
-  VMESS="{ \"v\": \"2\", \"ps\": \"Glitch_Vmess\", \"add\": \"${WEB_HOST}\", \"port\": \"443\", \"id\": \"${UUID}\", \"aid\": \"0\", \"scy\": \"none\", \"net\": \"ws\", \"type\": \"none\", \"host\": \"\${WEB_HOST}\", \"path\": \"/${WSPATH}-vmess?ed=2048\", \"tls\": \"tls\", \"sni\": \"\${WEB_HOST}\", \"alpn\": \"\" }"
-  cat > list << EOF
+  VMESS="{ \"v\": \"2\", \"ps\": \"Glitch_VMess_${PROJECT_DOMAIN}\", \"add\": \"${WEB_HOST}\", \"port\": \"443\", \"id\": \"${UUID}\", \"aid\": \"0\", \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"host\": \"${WEB_HOST}\", \"path\": \"/${WSPATH}-vmess\", \"tls\": \"tls\", \"sni\": \"${WEB_HOST}\", \"alpn\": \"\" }"
+  cat > list << -EOF
 *******************************************
-V2-rayN:
+v2RayN 帐号链接：
 ----------------------------
-vless://${UUID}@${WEB_HOST}:443?encryption=none&security=tls&sni=\${WEB_HOST}&type=ws&host=\${WEB_HOST}&path=%2F${WSPATH}-vless?ed=2048#Argo-Vless
+vless://${UUID}@${WEB_HOST}:443?encryption=none&security=tls&sni=${WEB_HOST}&type=ws&host=${WEB_HOST}&path=%2F${WSPATH}-vless#Glitch_VLESS_${PROJECT_DOMAIN}
 ----------------------------
 vmess://\$(echo \$VMESS | base64 -w0)
 ----------------------------
-trojan://${UUID}@$WEB_HOST:443?security=tls&sni=\${WEB_HOST}&type=ws&host=\${WEB_HOST}&path=%2F${WSPATH}-trojan?ed=2048#Argo-Trojan
+trojan://${UUID}@${WEB_HOST}:443?security=tls&sni=${WEB_HOST}&type=ws&host=${WEB_HOST}&path=%2F${WSPATH}-trojan#Glitch_TROJAN_${PROJECT_DOMAIN}
 ----------------------------
-ss://$(echo "chacha20-ietf-poly1305:${UUID}@${WEB_HOST}:443" | base64 -w0)@${WEB_HOST}:443#Argo-Shadowsocks
-由于该软件导出的链接不全，请自行处理如下: 传输协议: WS ， 伪装域名: \${WEB_HOST} ，路径: /${WSPATH}-shadowsocks?ed=2048 ， 传输层安全: tls ， sni: \${WEB_HOST}
-*******************************************
-小火箭:
-----------------------------
-vless://${UUID}@$WEB_HOST:443?encryption=none&security=tls&type=ws&host=\${WEB_HOST}&path=/${WSPATH}-vless?ed=2048&sni=\${WEB_HOST}#Argo-Vless
-----------------------------
-vmess://$(echo "none:${UUID}@$WEB_HOST:443" | base64 -w0)?remarks=Argo-Vmess&obfsParam=\${WEB_HOST}&path=/${WSPATH}-vmess?ed=2048&obfs=websocket&tls=1&peer=\${WEB_HOST}&alterId=0
-----------------------------
-trojan://${UUID}@$WEB_HOST:443?peer=\${WEB_HOST}&plugin=obfs-local;obfs=websocket;obfs-host=\${WEB_HOST};obfs-uri=/${WSPATH}-trojan?ed=2048#Argo-Trojan
-----------------------------
-ss://$(echo "chacha20-ietf-poly1305:${UUID}@$WEB_HOST:443" | base64 -w0)?obfs=wss&obfsParam=\${WEB_HOST}&path=/${WSPATH}-shadowsocks?ed=2048#Argo-Shadowsocks
-*******************************************
-Clash:
-----------------------------
-- {name: Argo-Vless, type: vless, server: $WEB_HOST, port: 443, uuid: ${UUID}, tls: true, servername: \${WEB_HOST}, skip-cert-verify: false, network: ws, ws-opts: {path: /${WSPATH}-vless?ed=2048, headers: { Host: \${WEB_HOST}}}, udp: true}
-----------------------------
-- {name: Argo-Vmess, type: vmess, server: $WEB_HOST, port: 443, uuid: ${UUID}, alterId: 0, cipher: none, tls: true, skip-cert-verify: true, network: ws, ws-opts: {path: /${WSPATH}-vmess?ed=2048, headers: {Host: \${WEB_HOST}}}, udp: true}
-----------------------------
-- {name: Argo-Trojan, type: trojan, server: $WEB_HOST, port: 443, password: ${UUID}, udp: true, tls: true, sni: \${WEB_HOST}, skip-cert-verify: false, network: ws, ws-opts: { path: /${WSPATH}-trojan?ed=2048, headers: { Host: \${WEB_HOST} } } }
-----------------------------
-- {name: Argo-Shadowsocks, type: ss, server: $WEB_HOST, port: 443, cipher: chacha20-ietf-poly1305, password: ${UUID}, plugin: v2ray-plugin, plugin-opts: { mode: websocket, host: \${WEB_HOST}, path: /${WSPATH}-shadowsocks?ed=2048, tls: true, skip-cert-verify: false, mux: false } }
+ss://$(echo "chacha20-ietf-poly1305:${UUID}" | base64 -w0)@${WEB_HOST}:443#Glitch_SS_${PROJECT_DOMAIN}
+
 *******************************************
 EOF
   cat list
