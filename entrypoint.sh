@@ -289,7 +289,7 @@ EOF
 
 export_list() {
   VMESS="{ \"v\": \"2\", \"ps\": \"Glitch_VMess_${PROJECT_DOMAIN}\", \"add\": \"${WEB_HOST}\", \"port\": \"443\", \"id\": \"${UUID}\", \"aid\": \"0\", \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"host\": \"${WEB_HOST}\", \"path\": \"/${WSPATH}-vmess\", \"tls\": \"tls\", \"sni\": \"${WEB_HOST}\", \"alpn\": \"\" }"
-  cat > list << -EOF
+  cat > list << EOF
 *******************************************
 v2RayN 帐号链接：
 ----------------------------
